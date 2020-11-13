@@ -1,23 +1,20 @@
+import 'materialize-css/dist/css/materialize.min.css';
 import React from 'react';
-import { render } from 'react-dom';
+import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
-import thunk from 'redux-thunk';
-
-import reducers from './reducers';
+import reduxThunk from 'redux-thunk';
 
 import App from './components/App';
+import reducers from './reducers';
 
-import './index.css';
+//development only axios helpers!
+import axios from 'axios';
+window.axios = axios;
 
-//import axios from 'axios';
-// window.axios = axios;
+//second argument is for serverside rendering n/a here hence {}
+const store = createStore(reducers, {}, applyMiddleware(reduxThunk));
 
-const store = createStore(reducers, applyMiddleware(thunk));
-
-render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
-  document.getElementById('root')
-);
+ReactDOM.render(
+    <Provider store = {store}><App /></Provider>, 
+    document.querySelector('#root'));

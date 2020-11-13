@@ -1,30 +1,18 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
 import SurveyList from './surveys/SurveyList';
-import LoginFirst from './LoginFirst';
 
-class Dashboard extends React.Component {
-  render() {
+const Dashboard = () => {
     return (
-      <div className="dashboard">
-        {this.props.auth ? (
-          <React.Fragment>
-            <div className="add-container">
-              <Link to="/surveys/new" className="add">
-                <i className="material-icons">add</i>
-              </Link>
-            </div>
+        <div style={{ marginLeft: "2.5em", marginRight: "2.5em", marginTop: "2em" }}>
             <SurveyList />
-          </React.Fragment>
-        ) : (
-          <LoginFirst />
-        )}
-      </div>
+            <div className="fixed-action-btn">
+                <Link to="/surveys/new" className="btn-floating btn-large red">
+                    <i className="material-icons">add</i>
+                </Link>
+            </div>
+        </div>
     );
-  }
-}
-const mapStateToProps = ({ auth }) => ({
-  auth
-});
-export default connect(mapStateToProps)(Dashboard);
+};
+
+export default Dashboard;
